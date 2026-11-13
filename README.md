@@ -2,6 +2,36 @@
 
 ![project overview](assets/crime_architecture.png)
 
+## Objective
+
+- **Problem** → a city has limited patrols, detectives and victim-support staff; it needs to know *what* happens *when* and *where*, how busy tomorrow will be, and which new reports need attention first
+- **Why this repo** → clean the hidden recording artefacts, map the patterns, forecast daily counts per district, and classify new reports using only what is known when the report is filed
+- **Real-world use** → patrol planning around theft hotspots, staffing from the daily forecast, and early flags for likely domestic cases so victim support can call sooner (never replacing the officer)
+
+## Highlights
+
+**Question:** where should patrols go for theft, and does that work for every crime?
+
+**Answer:** for theft, yes: 93 small hotspots (150 m, ≥ 40 incidents) hold 32 % of all thefts, led by the downtown shopping area. Robbery and car theft are spread out, so place-based patrols help much less there.
+
+![maps](assets/04_maps.png)
+
+**Question:** how many incidents will each district have tomorrow?
+
+**Answer:** within about 5.5 incidents per district-day (Poisson regression, 27 % better than "same as last week"). It misses what the past cannot show: Christmas and Winter Storm Elliott (about 390 a day instead of 650).
+
+**Question:** can a new report be flagged as domestic or likely to end in an arrest?
+
+**Answer:** domestic, well; arrest, only partly, once leaks are removed. Exact-minute timestamps alone gave the arrest away (15.5 % vs 2.8 %), because officers on the scene write precise times.
+
+| Target (test, Nov-Dec 2022) | PR-AUC | Base rate |
+|---|---|---|
+| Domestic | 0.738 | 0.167 |
+| Arrest, all crimes | 0.583 | 0.101 |
+| Arrest, reported crimes only | 0.276 | 0.069 |
+
+![leakage](assets/09_leakage.png)
+
 ## [1/7] Overview
 
 - **Data** → [Crime Prediction in Chicago 2022](https://www.kaggle.com/search?q=crime+prediction+in+chicago+2022) · 239,558 incidents · 1 Jan – 31 Dec 2022
