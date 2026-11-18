@@ -1,6 +1,6 @@
 # Chicago Crime 2022: Exploration, Forecasting and Classification without Leakage
 
-![project overview](assets/crime_architecture.png)
+![project overview](assets/png/crime_architecture.png)
 
 ## Objective
 
@@ -14,7 +14,7 @@
 
 **Answer:** for theft, yes: 93 small hotspots (150 m, ≥ 40 incidents) hold 32 % of all thefts, led by the downtown shopping area. Robbery and car theft are spread out, so place-based patrols help much less there.
 
-![maps](assets/04_maps.png)
+![maps](assets/png/04_maps.png)
 
 **Question:** how many incidents will each district have tomorrow?
 
@@ -30,7 +30,7 @@
 | Arrest, all crimes | 0.583 | 0.101 |
 | Arrest, reported crimes only | 0.276 | 0.069 |
 
-![leakage](assets/09_leakage.png)
+![leakage](assets/png/09_leakage.png)
 
 ## [1/7] Overview
 
@@ -68,9 +68,9 @@
 - **Where** → 93 theft hotspots hold 32 % of thefts (downtown shopping area first); robbery and car theft are diffuse
 - **Arrests** → follow detection: narcotics 97 % vs theft 4 %
 
-![when](assets/02_when.png)
+![when](assets/png/02_when.png)
 
-![hotspots](assets/05_hotspots.png)
+![hotspots](assets/png/05_hotspots.png)
 
 ## [5/7] Forecasting
 
@@ -78,20 +78,20 @@
 - **Result** → Poisson regression MAE 5.51 vs 5.78 (28-day mean), 5.80 (LightGBM), 7.60 (last week)
 - **Misses** → Christmas + Winter Storm Elliott (~390/day) and "1st of the month" spikes → weather and holiday features next
 
-![forecast](assets/08_forecast.png)
+![forecast](assets/png/08_forecast.png)
 
 ## [6/7] Leakage audit and classification
 
-![leakage audit](assets/crime_leakage_audit.png)
+![leakage audit](assets/png/crime_leakage_audit.png)
 
 - **Removed** → IUCR / FBI code / description (define or name the target), police-initiated types for A2, and **timestamp precision**: exact-minute times end in arrest 15.5 % vs 2.8 % (officer on scene)
 - **B crime type** → place identifies theft, battery, car theft and fraud; assault and robbery look like everything else
 - **A arrest** → type first, then place: shoplifting in stores with security (22 %) vs 7.5 % average
 - **C domestic** → apartments 46 % and residences 40 % vs ~1 % in stores
 
-![type model](assets/10_type_model.png)
+![type model](assets/png/10_type_model.png)
 
-![domestic drivers](assets/12_domestic_drivers.png)
+![domestic drivers](assets/png/12_domestic_drivers.png)
 
 ## [7/7] Next steps
 
@@ -99,4 +99,4 @@
 - **Spatial models** → neighbouring beats as features, or a spatio-temporal model
 - **More years** → 2001–today is public on the Chicago Data Portal; test whether patterns hold
 
-The first version of this project is kept in `arch/`. Editable diagrams: `assets/*.drawio`.
+The original notebooks are kept in `arch/`. Editable diagrams: `assets/drawio/*.drawio`.
